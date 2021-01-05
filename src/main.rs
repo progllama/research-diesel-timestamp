@@ -7,8 +7,11 @@ use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
 
+pub mod schema;
+pub mod models;
+
 fn main() {
-    
+
 }
 
 pub fn establish_connection() -> PgConnection {
