@@ -11,7 +11,20 @@ pub mod schema;
 pub mod models;
 
 fn main() {
+    use self::schema::notes::dsl::*;
 
+    let connection = establish_connection();
+    let results = notes
+        .limit(5)
+        .load::<models::Note>(&connection)
+        .expect("Error loading posts");
+
+    println!("Displaying {} posts", results.len());
+    for note in results {
+        println!("{}", note.text);
+        println!("----------\n");
+        println!("{}", note.created_at);
+    }
 }
 
 pub fn establish_connection() -> PgConnection {
